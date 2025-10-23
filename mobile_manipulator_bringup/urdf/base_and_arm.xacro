@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot name="mob_manipulator" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find mobile_manipulator)/urdf/robot.gazebo"/>
+  <!-- Re-use existing base and 4-DOF arm from workspace root file by inlining here would be ideal, but we replicate minimal links -->
+  <xacro:macro name="base_and_arm" params="">
+    <!-- Include the workspace root xacro content if available -->
+    <xacro:include filename="$(find mobile_manipulator_bringup)/urdf/from_root_mobile_manipulator.urdf.xacro"/>
+  </xacro:macro>
+</robot>

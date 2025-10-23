@@ -1,0 +1,67 @@
+topics:
+  # Velocity commands: map ROS /cmd_vel to GZ model-scoped topic
+  - ros_topic_name: "/cmd_vel"
+    gz_topic_name: "/model/mobile_manipulator/cmd_vel"
+    ros_type_name: "geometry_msgs/msg/Twist"
+    gz_type_name: "gz.msgs.Twist"
+    direction: ROS_TO_GZ
+
+  # Odometry: expose model odometry on /odom
+  - ros_topic_name: "/odom"
+    gz_topic_name: "/model/mobile_manipulator/odometry"
+    ros_type_name: "nav_msgs/msg/Odometry"
+    gz_type_name: "gz.msgs.Odometry"
+    direction: GZ_TO_ROS
+
+  # Lidar: expose model lidar on /scan
+  - ros_topic_name: "/scan"
+    gz_topic_name: "/model/mobile_manipulator/scan"
+    ros_type_name: "sensor_msgs/msg/LaserScan"
+    gz_type_name: "gz.msgs.LaserScan"
+    direction: GZ_TO_ROS
+
+  # Camera: expose model camera on /camera/image_raw
+  - ros_topic_name: "/camera/image_raw"
+    gz_topic_name: "/model/mobile_manipulator/camera/image_raw"
+    ros_type_name: "sensor_msgs/msg/Image"
+    gz_type_name: "gz.msgs.Image"
+    direction: GZ_TO_ROS
+
+  # Clock
+  - ros_topic_name: "/clock"
+    gz_topic_name: "/world/maze_world/clock"
+    ros_type_name: "rosgraph_msgs/msg/Clock"
+    gz_type_name: "gz.msgs.Clock"
+    direction: GZ_TO_ROS
+
+  # Arm control (Float64 -> gz Double)
+  - ros_topic_name: "/arm_controller/joint1"
+    gz_topic_name: "/model/mobile_manipulator/arm_controller/joint1"
+    ros_type_name: "std_msgs/msg/Float64"
+    gz_type_name: "gz.msgs.Double"
+    direction: ROS_TO_GZ
+  - ros_topic_name: "/arm_controller/joint2"
+    gz_topic_name: "/model/mobile_manipulator/arm_controller/joint2"
+    ros_type_name: "std_msgs/msg/Float64"
+    gz_type_name: "gz.msgs.Double"
+    direction: ROS_TO_GZ
+  - ros_topic_name: "/arm_controller/joint3"
+    gz_topic_name: "/model/mobile_manipulator/arm_controller/joint3"
+    ros_type_name: "std_msgs/msg/Float64"
+    gz_type_name: "gz.msgs.Double"
+    direction: ROS_TO_GZ
+  - ros_topic_name: "/arm_controller/joint4"
+    gz_topic_name: "/model/mobile_manipulator/arm_controller/joint4"
+    ros_type_name: "std_msgs/msg/Float64"
+    gz_type_name: "gz.msgs.Double"
+    direction: ROS_TO_GZ
+  - ros_topic_name: "/gripper/left"
+    gz_topic_name: "/model/mobile_manipulator/gripper/left"
+    ros_type_name: "std_msgs/msg/Float64"
+    gz_type_name: "gz.msgs.Double"
+    direction: ROS_TO_GZ
+  - ros_topic_name: "/gripper/right"
+    gz_topic_name: "/model/mobile_manipulator/gripper/right"
+    ros_type_name: "std_msgs/msg/Float64"
+    gz_type_name: "gz.msgs.Double"
+    direction: ROS_TO_GZ
