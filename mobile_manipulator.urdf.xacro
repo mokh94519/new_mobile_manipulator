@@ -418,6 +418,7 @@
 </link>
 
 <!-- ========== INCLUDE GAZEBO PLUGINS ========== -->
-<xacro:include filename="$(find mobile_manipulator)/urdf/robot.gazebo"/>
+<!-- Updated include path to point directly to the local robot.gazebo file -->
+<xacro:include filename="/workspace/robot.gazebo"/>
 
 </robot>
