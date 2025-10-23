@@ -1,0 +1,1 @@
+Models can be added here if split from SDF world. Currently, collectibles and box are embedded in the world file.

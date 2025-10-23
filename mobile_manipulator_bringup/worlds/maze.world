@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<sdf version="1.10">
+  <world name="maze_world">
+    <plugin name="ros_gz_sim" filename="libros_gz_system.so"/>
+
+    <include>
+      <uri>file://ground_plane.sdf</uri>
+    </include>
+
+    <include>
+      <uri>file://sun.sdf</uri>
+    </include>
+
+    <!-- Simple maze built with boxes -->
+    <model name="maze">
+      <static>true</static>
+      <link name="maze_link">
+        <!-- walls -->
+        <collision name="wall1_col">
+          <geometry><box><size>6 0.2 1.0</size></box></geometry>
+          <pose>0 2 0.5 0 0 0</pose>
+        </collision>
+        <visual name="wall1_vis">
+          <geometry><box><size>6 0.2 1.0</size></box></geometry>
+          <pose>0 2 0.5 0 0 0</pose>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+
+        <collision name="wall2_col">
+          <geometry><box><size>6 0.2 1.0</size></box></geometry>
+          <pose>0 -2 0.5 0 0 0</pose>
+        </collision>
+        <visual name="wall2_vis">
+          <geometry><box><size>6 0.2 1.0</size></box></geometry>
+          <pose>0 -2 0.5 0 0 0</pose>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+
+        <collision name="wall3_col">
+          <geometry><box><size>0.2 4 1.0</size></box></geometry>
+          <pose>3 0 0.5 0 0 0</pose>
+        </collision>
+        <visual name="wall3_vis">
+          <geometry><box><size>0.2 4 1.0</size></box></geometry>
+          <pose>3 0 0.5 0 0 0</pose>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+
+        <collision name="wall4_col">
+          <geometry><box><size>0.2 4 1.0</size></box></geometry>
+          <pose>-3 0 0.5 0 0 0</pose>
+        </collision>
+        <visual name="wall4_vis">
+          <geometry><box><size>0.2 4 1.0</size></box></geometry>
+          <pose>-3 0 0.5 0 0 0</pose>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+
+        <!-- internal partitions -->
+        <collision name="wall5_col">
+          <geometry><box><size>3 0.2 1.0</size></box></geometry>
+          <pose>-1.5 0.5 0.5 0 0 0</pose>
+        </collision>
+        <visual name="wall5_vis">
+          <geometry><box><size>3 0.2 1.0</size></box></geometry>
+          <pose>-1.5 0.5 0.5 0 0 0</pose>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+
+        <collision name="wall6_col">
+          <geometry><box><size>3 0.2 1.0</size></box></geometry>
+          <pose>1.5 -0.5 0.5 0 0 0</pose>
+        </collision>
+        <visual name="wall6_vis">
+          <geometry><box><size>3 0.2 1.0</size></box></geometry>
+          <pose>1.5 -0.5 0.5 0 0 0</pose>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Collectible objects -->
+    <model name="collectible_1">
+      <pose>0.5 0.5 0.05 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.1</mass></inertial>
+        <collision name="col"><geometry><sphere><radius>0.05</radius></sphere></geometry></collision>
+        <visual name="vis"><geometry><sphere><radius>0.05</radius></sphere></geometry>
+          <material><ambient>1 0 0 1</ambient></material></visual>
+      </link>
+    </model>
+    <model name="collectible_2">
+      <pose>-0.5 -0.5 0.05 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.1</mass></inertial>
+        <collision name="col"><geometry><sphere><radius>0.05</radius></sphere></geometry></collision>
+        <visual name="vis"><geometry><sphere><radius>0.05</radius></sphere></geometry>
+          <material><ambient>0 0 1 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <!-- Collection box -->
+    <model name="collection_box">
+      <static>true</static>
+      <pose>0 0 0.125 0 0 0</pose>
+      <link name="box">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.25</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.4 0.4 0.25</size></box></geometry>
+          <material><ambient>0 1 0 1</ambient></material></visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
