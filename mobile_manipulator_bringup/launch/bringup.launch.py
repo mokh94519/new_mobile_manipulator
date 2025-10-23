@@ -1,9 +1,10 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.actions import ExecuteProcess
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
@@ -38,7 +39,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # ros_gz_bridge from YAML
+    # ros_gz_bridge from YAML (pass via config_file param)
     bridge_yaml = PathJoinSubstitution([
         FindPackageShare('mobile_manipulator_bringup'), 'config', 'bridge_topics.yaml'
     ])
@@ -46,7 +47,7 @@ def generate_launch_description():
     parameter_bridge = Node(
         package='ros_gz_bridge', executable='parameter_bridge',
         name='parameter_bridge', output='screen',
-        parameters=[bridge_yaml]
+        parameters=[{'config_file': bridge_yaml}]
     )
 
     # SLAM Toolbox
@@ -60,15 +61,20 @@ def generate_launch_description():
         parameters=[slam_params]
     )
 
-    # Nav2 minimal lifecycle bringup
+    # Nav2 bringup (include launch)
     nav2_params = PathJoinSubstitution([
         FindPackageShare('mobile_manipulator_bringup'), 'config', 'nav2.yaml'
     ])
 
-    nav2 = Node(
-        package='nav2_bringup', executable='bringup_launch.py',
-        name='nav2_bringup', output='screen',
-        parameters=[nav2_params]
+    nav2 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            FindPackageShare('nav2_bringup'), 'launch', 'bringup_launch.py'
+        ]),
+        launch_arguments={
+            'use_sim_time': use_sim_time,
+            'params_file': nav2_params,
+            'slam': 'True'
+        }.items()
     )
 
     # Nodes
